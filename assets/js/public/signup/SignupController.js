@@ -55,7 +55,7 @@ angular.module('SignupModule').controller('SignupController', ['$scope', '$http'
 
       // Handle known error type(s).
       // Invalid username / password combination.
-      if (sailsResponse.status === 400 || 404) {
+      if (sailsResponse.status === 400 || sailsResponse.status === 404) {
         // $scope.loginForm.topLevelErrorMessage = 'Invalid email/password combination.';
         //
         toastr.error('Invalid email/password combination.', 'Error', {
