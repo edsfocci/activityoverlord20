@@ -39,11 +39,17 @@ module.exports = {
 
         success: function (){
 
-          // Store user id in the user session
-          req.session.me = user.id;
+          // Update lastLoggedIn
+          user.lastLoggedIn = new Date();
+          user.save(function(err, user) {
+            if (err) return next(err);
 
-          // All done- let the client know that everything worked.
-          return res.ok();
+            // Store user id in the user session
+            req.session.me = user.id;
+
+            // All done- let the client know that everything worked.
+            return res.ok();
+          });
         }
       });
     });
